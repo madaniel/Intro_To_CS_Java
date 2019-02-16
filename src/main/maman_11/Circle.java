@@ -19,11 +19,13 @@ public class Circle {
 
 
     public static void main(String[] args) {
+
         Scanner scan = new Scanner(System.in);
 
         System.out.println("\nThis program calculates the areas and the perimeters of the ex-circle and the in-circle of a given rectangle.\n");
         System.out.print("Please enter the two coordinates of the left-upper point of the rectangle: ");
 
+        // User input
         int leftUpX = scan.nextInt();
         int leftUpY = scan.nextInt();
 
@@ -32,7 +34,7 @@ public class Circle {
         int rightDownX = scan.nextInt();
         int rightDownY = scan.nextInt();
 
-        //calc
+        // Calc
         int rectangleHeight = (leftUpY - rightDownY);
         double inCircleRadius = rectangleHeight / 2.0;
         double inCircleArea = PI * Math.pow(inCircleRadius, 2);
