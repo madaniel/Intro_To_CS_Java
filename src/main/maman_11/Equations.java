@@ -20,11 +20,28 @@ public class Equations {
         int b2 = scan.nextInt();
 
         // Calc
-        String solution = "";
+        boolean singleSolution = (a11 * a22) - (a12 * a21) != 0;
+        boolean infiniteCondition1 = (b2 * a11) - (b1 * a21) == 0;
+        boolean infiniteCondition2 = (b1 * a22) - (b2 * a12) == 0;
+        boolean infiniteCondition3 = b1 != 0 && a11 == 0 && a12 == 0 || b2 !=0 && a21 == 0 && a22 == 0;
+        boolean infiniteSolution = ! singleSolution && infiniteCondition1 && infiniteCondition2 && ! infiniteCondition3;
+
+        String answer = "No Solution";
+        double solutionX1;
+        double solutionX2;
+
+        if (singleSolution){
+            solutionX1 = (double)(b1 * a22 - b2 * a12) / (double)(a11 * a22 - a12 * a21);
+            solutionX2 = (double)(b2 * a11 - b1 * a21) / (double)(a11 * a22 - a12 * a21);
+            answer = "Single solution: (" + solutionX1 + "," + solutionX2 + ")";
+        }
+
+        else if (infiniteSolution)
+            answer = "Many solutions";
 
         //Output
         System.out.println("Eq1: " + a11 + "*x1+" + a12 + "*x2=" + b1);
         System.out.println("Eq2: " + a21 + "*x1+" + a22 + "*x2=" + b2);
-        System.out.println(solution);
+        System.out.println(answer);
     }
 }
