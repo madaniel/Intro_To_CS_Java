@@ -2,6 +2,16 @@ package main.maman_11;
 
 import java.util.Scanner;
 
+/**
+ * This class will get 6 ints of coefficients of 2 linear equations
+ *
+ *
+ * @author  Daniel Madar
+ * @version 1.0
+ * @since   2/16/2019
+ */
+
+
 public class Equations {
 
     public static void main(String[] args) {
@@ -19,13 +29,16 @@ public class Equations {
         int b1 = scan.nextInt();
         int b2 = scan.nextInt();
 
-        // Calc
+        // In case the system has a single solution
         boolean singleSolution = (a11 * a22) - (a12 * a21) != 0;
         boolean infiniteCondition1 = (b2 * a11) - (b1 * a21) == 0;
         boolean infiniteCondition2 = (b1 * a22) - (b2 * a12) == 0;
         boolean infiniteCondition3 = b1 != 0 && a11 == 0 && a12 == 0 || b2 !=0 && a21 == 0 && a22 == 0;
+
+        // Conditions for the system to has infinite solutions
         boolean infiniteSolution = ! singleSolution && infiniteCondition1 && infiniteCondition2 && ! infiniteCondition3;
 
+        // If the other conditions will not apply, the remained true condition will be "no solution"
         String answer = "No Solution";
         double solutionX1;
         double solutionX2;
