@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * This class will get 6 ints of coefficients of 2 linear equations
+ * It will return the solution, if exists, or "No Solution" / "Many Solution" accordingly.
  *
  *
  * @author  Daniel Madar
