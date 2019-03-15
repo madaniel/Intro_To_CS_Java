@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * This class will get 6 ints of coefficients of 2 linear equations
  * It will return the solution, if exists, or "No Solution" / "Many Solution" accordingly.
- *
+ * Based on Cramer's rule
  *
  * @author  Daniel Madar
  * @version 1.0
@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 
 public class Equations {
+
+    static private final double ROUND_PRECISION = 1000.0;
 
     public static void main(String[] args) {
 
@@ -45,9 +47,13 @@ public class Equations {
         double solutionX2;
 
         if (singleSolution){
+            // Following Cramer's rule
             solutionX1 = (double)(b1 * a22 - b2 * a12) / (double)(a11 * a22 - a12 * a21);
             solutionX2 = (double)(b2 * a11 - b1 * a21) / (double)(a11 * a22 - a12 * a21);
-            answer = "Single solution: (" + solutionX1 + "," + solutionX2 + ")";
+            // Round the values to the requested precision
+            double roundedSolutionX1 = (double)Math.round(solutionX1 * ROUND_PRECISION) / ROUND_PRECISION;
+            double roundedSolutionX2 = (double)Math.round(solutionX2 * ROUND_PRECISION) / ROUND_PRECISION;
+            answer = "Single solution: (" + roundedSolutionX1 + "," + roundedSolutionX2 + ")";
         }
 
         else if (infiniteSolution)
