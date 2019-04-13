@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JunitCollectionTester {
 
-    static private final int MAX_NUM_BOXES = 1;
+    static private final int MAX_NUM_BOXES = 100;
     private Collection testCollection1;
     private Collection testCollection2;
     private Point3D base;
@@ -50,8 +50,41 @@ class JunitCollectionTester {
 
     @Test
     void testMostUpperBaseCorner() {
+        Box3D b1 = new Box3D();
+        base = new Point3D();
+
+        for(int i=1; i <= 10; i++){
+            base = new Point3D(0, 0, i);
+            b1 = new Box3D(base, 1, 1, 1);
+            assertTrue(testCollection1.addBox(b1));
+        }
+        assertEquals(b1.toString(), testCollection1.mostUpperBaseCorner().toString());
+
+        base = new Point3D(0.0, 0.0, 100);
+        Box3D b2 = new Box3D(base, 1, 1, 1);
+        testCollection1.addBox(b2);
+        assertEquals(b2.toString(), testCollection1.mostUpperBaseCorner().toString());
+    }
+
+    @Test
+    void testTotalSurfaceArea(){
 
     }
+
+    @Test
+    void testLongestDistance(){
+
+    }
+
+    @Test
+    void testHowManyContains(){
+    }
+
+    @Test
+    void testVolumeOfSmallerBox(){
+    }
+
+
 
 
 

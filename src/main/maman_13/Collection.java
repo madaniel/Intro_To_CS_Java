@@ -1,5 +1,6 @@
 package main.maman_13;
 import main.maman_12.Box3D;
+import main.maman_12.Point3D;
 
 /**
  * This class represents a collection of 3D boxes
@@ -11,7 +12,7 @@ import main.maman_12.Box3D;
 
 public class Collection {
 
-    static private final int MAX_NUM_BOXES = 10;
+    static private final int MAX_NUM_BOXES = 100;
 
     private Box3D [] _boxes;
     private int _numberOfBoxes;
@@ -19,6 +20,26 @@ public class Collection {
     public Collection() {
         this._boxes = new Box3D[MAX_NUM_BOXES];
         this._numberOfBoxes = 0;
+    }
+
+    public Box3D mostUpperBaseCorner(){
+    /*
+    Returns the box with the higher base point
+    */
+    // Setting the first box as the upper base
+    int maxBaseIndex = 0;
+    Point3D maxBasePoint = this._boxes[0].getBase();
+
+    // Comparing the first box with the others
+    for (int i=1; i < this._numberOfBoxes ; i++){
+
+        if (this._boxes[i].getBase().isAbove(maxBasePoint)){
+            maxBaseIndex = i;
+            maxBasePoint = this._boxes[i].getBase();
+            }
+        }
+
+    return this._boxes[maxBaseIndex];
     }
 
     public boolean addBox(Box3D box){
@@ -47,7 +68,7 @@ public class Collection {
 
         for (int i=0; i < this._numberOfBoxes; i++){
             result += this._boxes[i].toString();
-            result += "\n";
+            result += '\n';
         }
 
         return result;
