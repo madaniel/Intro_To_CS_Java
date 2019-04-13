@@ -68,7 +68,15 @@ class JunitCollectionTester {
 
     @Test
     void testTotalSurfaceArea(){
+        for(int i=0; i < 3; i++){
+            testCollection1.addBox(new Box3D());
+        }
+        assertEquals(6*3, testCollection1.totalSurfaceArea());
 
+        for(int i=0; i < 3; i++){
+            testCollection1.addBox(new Box3D(base, 2, 2, 2));
+        }
+        assertEquals(6*3+6*2*2*3, testCollection1.totalSurfaceArea());
     }
 
     @Test
@@ -83,9 +91,4 @@ class JunitCollectionTester {
     @Test
     void testVolumeOfSmallerBox(){
     }
-
-
-
-
-
 }

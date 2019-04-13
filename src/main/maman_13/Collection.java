@@ -22,6 +22,35 @@ public class Collection {
         this._numberOfBoxes = 0;
     }
 
+    public int totalSurfaceArea(){
+        int total = 0;
+
+        for(int i=0; i < this._numberOfBoxes; i++)
+            total += this._boxes[i].getSurfaceArea();
+
+        return total;
+    }
+
+    public double longestDistance(){
+        return 0.0;
+    }
+
+    public int howManyContains(){
+        return 0;
+    }
+
+    public int volumeOfSmallerBox(){
+        return 0;
+    }
+
+    public Collection getBoxes(){
+        return null;
+    }
+
+    public int getNumOfBoxes(){
+        return 0;
+    }
+
     public Box3D mostUpperBaseCorner(){
     /*
     Returns the box with the higher base point
