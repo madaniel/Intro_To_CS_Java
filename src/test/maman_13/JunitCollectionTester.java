@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLSyntaxErrorException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class JunitCollectionTester {
@@ -81,7 +83,13 @@ class JunitCollectionTester {
 
     @Test
     void testLongestDistance(){
+        assertEquals(0,testCollection1.longestDistance());
 
+        for(int i=0; i < 5; i++){
+            base = new Point3D(i, i, i);
+            testCollection1.addBox(new Box3D(base, 2, 2, 2));
+        }
+        assertEquals(testCollection1.getBoxes()[0].distance(testCollection1.getBoxes()[4]),testCollection1.longestDistance());
     }
 
     @Test
@@ -90,5 +98,13 @@ class JunitCollectionTester {
 
     @Test
     void testVolumeOfSmallerBox(){
+    }
+
+    @Test
+    void testGetBoxes(){
+        for(int i=0; i < 1; i++){
+            testCollection1.addBox(new Box3D());
+        }
+        testCollection1.getBoxes();
     }
 }

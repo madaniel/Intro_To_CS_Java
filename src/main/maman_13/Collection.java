@@ -32,7 +32,10 @@ public class Collection {
     }
 
     public double longestDistance(){
-        return 0.0;
+        if(this._numberOfBoxes < 2)
+                return 0;
+
+        return _getMinCenterPoint(this._boxes).distance(_getMaxCenterPoint(this._boxes));
     }
 
     public int howManyContains(){
@@ -43,15 +46,20 @@ public class Collection {
         return 0;
     }
 
-    public Collection getBoxes(){
-        return null;
+    public Box3D [] getBoxes(){
+        Box3D [] boxCopy = new Box3D[this._numberOfBoxes];
+
+        for(int i=0; i < boxCopy.length; i++)
+            boxCopy[i] = new Box3D(this._boxes[i]);
+
+        return boxCopy;
     }
 
     public int getNumOfBoxes(){
-        return 0;
+        return this._numberOfBoxes;
     }
 
-    public Box3D mostUpperBaseCorner(){
+    public Box3D mostUpperBaseCorner() {
     /*
     Returns the box with the higher base point
     */
@@ -101,6 +109,36 @@ public class Collection {
         }
 
         return result;
+    }
+
+    private Point3D _getMinCenterPoint(Box3D [] boxesArray){
+        /*
+        Return the minimum sum of center point in array
+        */
+        int minIndex = 0;
+
+        for(int i=1; i < this._numberOfBoxes; i++)
+            if (_sumOfPoint(boxesArray[i].getCenter()) < _sumOfPoint(boxesArray[minIndex].getCenter()))
+                minIndex = i;
+
+        return boxesArray[minIndex].getCenter();
+    }
+
+    private Point3D _getMaxCenterPoint(Box3D [] boxesArray){
+        /*
+        Return the maximum sum of point in array
+        */
+        int maxIndex = 0;
+
+        for(int i=1; i < this._numberOfBoxes; i++)
+            if (_sumOfPoint(boxesArray[i].getCenter()) > _sumOfPoint(boxesArray[maxIndex].getCenter()))
+                maxIndex = i;
+
+        return boxesArray[maxIndex].getCenter();
+    }
+
+    private double _sumOfPoint(Point3D point){
+        return point.getX() + point.getY() + point.getZ();
     }
 
     private void _insertBoxByIndex(Box3D box, int index){
