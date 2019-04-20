@@ -67,8 +67,8 @@ class JunitMatrixTester {
                 "254" + "\t" + "253" + "\t" + "252" + "\n" +
                 "254" + "\t" + "253" + "\t" + "252" + "\n";
 
-        Matrix matrixNegative1 = new Matrix(matrix1.makeNegative());
-        Matrix matrixNegative2 = new Matrix(matrix2.makeNegative());
+        Matrix matrixNegative1 = matrix1.makeNegative();
+        Matrix matrixNegative2 = matrix2.makeNegative();
 
         assertEquals(expected1, matrixNegative1.toString());
         assertEquals(expected2, matrixNegative2.toString());
@@ -94,10 +94,10 @@ class JunitMatrixTester {
                 "2" + "\t" + "6" + "\t" + "10" + "\n" +
                 "1" + "\t" + "5" + "\t" + "9" + "\n";
 
-        Matrix matrixRotateCounterClockwise1 = new Matrix(matrix1.rotateCounterClockwise());
-        Matrix matrixRotateCounterClockwise2 = new Matrix(matrix2.rotateCounterClockwise());
-        Matrix matrixRotateCounterClockwise3 = new Matrix(matrix3.rotateCounterClockwise());
-        Matrix matrixRotateCounterClockwise4 = new Matrix(matrix4.rotateCounterClockwise());
+        Matrix matrixRotateCounterClockwise1 = matrix1.rotateCounterClockwise();
+        Matrix matrixRotateCounterClockwise2 = matrix2.rotateCounterClockwise();
+        Matrix matrixRotateCounterClockwise3 = matrix3.rotateCounterClockwise();
+        Matrix matrixRotateCounterClockwise4 = matrix4.rotateCounterClockwise();
 
         assertEquals(expected1, matrixRotateCounterClockwise1.toString());
         assertEquals(expected2, matrixRotateCounterClockwise2.toString());
@@ -125,16 +125,18 @@ class JunitMatrixTester {
                 "11" + "\t" + "7" + "\t" + "3" + "\n" +
                 "12" + "\t" + "8" + "\t" + "4" + "\n";
 
-        Matrix matrixRotateClockwise1 = new Matrix(matrix1.rotateClockwise());
-        Matrix matrixRotateClockwise2 = new Matrix(matrix2.rotateClockwise());
-        Matrix matrixRotateClockwise3 = new Matrix(matrix3.rotateClockwise());
-        Matrix matrixRotateClockwise4 = new Matrix(matrix4.rotateClockwise());
+        Matrix matrixRotateClockwise1 = matrix1.rotateClockwise();
+        Matrix matrixRotateClockwise2 = matrix2.rotateClockwise();
+        Matrix matrixRotateClockwise3 = matrix3.rotateClockwise();
+        Matrix matrixRotateClockwise4 = matrix4.rotateClockwise();
 
         assertEquals(expected1, matrixRotateClockwise1.toString());
         assertEquals(expected2, matrixRotateClockwise2.toString());
         assertEquals(expected3, matrixRotateClockwise3.toString());
         assertEquals(expected4, matrixRotateClockwise4.toString());
     }
+
 }
+
 
 

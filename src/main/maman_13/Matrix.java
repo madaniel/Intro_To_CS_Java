@@ -35,34 +35,34 @@ public class Matrix {
         return result;
     }
 
-    public int [][] makeNegative(){
+    public Matrix makeNegative(){
         int [][] negativeMatrix = _getMatrix(this._matrixArray);
 
         for(int row=0; row < negativeMatrix.length; row++)
             for(int col=0; col < negativeMatrix[0].length; col++)
                 negativeMatrix[row][col] = 255 - this._matrixArray[row][col];
 
-        return negativeMatrix;
+        return new Matrix(negativeMatrix);
     }
 
-    public int [][] rotateCounterClockwise(){
+    public Matrix rotateCounterClockwise(){
         int [][] rotatedClockwiseMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
 
         for(int row=0; row < this._matrixArray.length; row++)
             for(int col=0; col < this._matrixArray[0].length; col++)
                 rotatedClockwiseMatrix[col][row] = this._matrixArray[row][this._matrixArray[0].length - 1 - col];
 
-        return rotatedClockwiseMatrix;
+        return new Matrix(rotatedClockwiseMatrix);
     }
 
-    public int [][] rotateClockwise(){
+    public Matrix rotateClockwise(){
         int [][] rotatedClockwiseMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
 
         for(int row=0; row < this._matrixArray.length; row++)
             for(int col=0; col < this._matrixArray[0].length; col++)
                 rotatedClockwiseMatrix[col][this._matrixArray.length -1 - row] = this._matrixArray[row][col];
 
-        return rotatedClockwiseMatrix;
+        return new Matrix(rotatedClockwiseMatrix);
     }
 
     private int [][] _getMatrix(int [][] matrixSource){
