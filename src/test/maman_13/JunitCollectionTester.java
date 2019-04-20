@@ -51,7 +51,7 @@ class JunitCollectionTester {
 
     @Test
     void testMostUpperBaseCorner() {
-        Box3D b1 = new Box3D();
+        Box3D b1 = new Box3D(new Point3D(0, 0, 10), 1, 1, 1);
         base = new Point3D();
 
         for(int i=1; i <= 10; i++)

@@ -152,7 +152,7 @@ public class Collection {
         String result = "";
 
         for (int i=0; i < this._numberOfBoxes; i++){
-            result += "Box no. " + i + ": " + this._boxes[i].toString();
+            result += "Box no. " + (i+1) + ": " + this._boxes[i].toString();
             result += '\n';
         }
 

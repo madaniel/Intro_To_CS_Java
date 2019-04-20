@@ -1,5 +1,4 @@
 package main.maman_12;
-import main.maman_12.Point3D;
 
 /**
  * This class represents a 3D box
