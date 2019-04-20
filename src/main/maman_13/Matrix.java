@@ -66,7 +66,7 @@ public class Matrix {
     }
 
     public Matrix imageFilterAverage(){
-        int [][] imageFilterAverageMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
+        int [][] imageFilterAverageMatrix = _getMatrix(new int [this._matrixArray.length][this._matrixArray[0].length]);
 
         for(int row=0; row < this._matrixArray.length; row++)
             for(int col=0; col < this._matrixArray[0].length; col++)

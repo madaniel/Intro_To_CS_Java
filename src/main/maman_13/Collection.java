@@ -52,12 +52,11 @@ public class Collection {
         /*
         Returns the smallest volume of box which contain all the boxes in sub array from i to j indexes
          */
-
-        if(!_isSubArrayLegal(i, j))
-            return 0;
-
         int start = i <= j ? i : j;
         int end = i <= j ? j : i;
+
+        if(!_isSubArrayLegal(start, end))
+            return 0;
 
         // Copy the sub array
         Box3D [] subArray = _getSubArray(start, end);
@@ -88,6 +87,10 @@ public class Collection {
     /*
     Returns the box with the higher base point
     */
+
+    if(this._numberOfBoxes == 0)
+        return null;
+
     // Setting the first box as the upper base
     int maxBaseIndex = 0;
     Point3D maxBasePoint = this._boxes[0].getBase();
@@ -101,7 +104,7 @@ public class Collection {
             }
         }
 
-    return this._boxes[maxBaseIndex];
+    return new Box3D(this._boxes[maxBaseIndex]);
     }
 
     public boolean addBox(Point3D base, int length, int width, int height){
@@ -131,7 +134,7 @@ public class Collection {
         String result = "";
 
         for (int i=0; i < this._numberOfBoxes; i++){
-            result += this._boxes[i].toString();
+            result += "Box no. " + i + ": " + this._boxes[i].toString();
             result += '\n';
         }
 

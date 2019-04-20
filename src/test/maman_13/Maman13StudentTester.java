@@ -2,6 +2,7 @@ package test.maman_13;
 import main.maman_12.Box3D;
 import main.maman_12.Point3D;
 import main.maman_13.Collection;
+import main.maman_13.Matrix;
 
 /**
  * class Maman13StudentTester here.
@@ -44,32 +45,32 @@ public class Maman13StudentTester {
 		int volumeOfSmallestBox = c1.volumeOfSmallestBox(1, 2);
 		System.out.println("volumeOfSmallestBox = " + volumeOfSmallestBox);
 
-//
-//
-//		// MATRIX
-//		System.out.println("\nTest Matrix:\n");
-//		System.out.println("for Matrix m2 = new Matrix(3, 3); the toString of m2 is:");
-//		Matrix m2 = new Matrix(3, 3);
-//		System.out.println(m2);
-//
-//		System.out.println("\nfor a = { { 10, 30, 50 }, { 100, 150, 200 } };");
-//		int[][] a = { { 10, 30, 50 }, { 100, 150, 200 } };
-//		Matrix m1 = new Matrix(a);
-//		System.out.println("\nfor Matrix m1 = new Matrix(a); the toString of m1 is:");
-//		System.out.println(m1);
-//		Matrix temp;
-//
-//		temp = m1.makeNegative();
-//		System.out.println("resuls of m1.makeNegative(); \n" + temp);
-//
-//		temp = m1.imageFilterAverage();
-//		System.out.println("resuls of m1.imageFilterAverage(); \n" + temp);
-//
-//		temp = m1.rotateClockwise();
-//		System.out.println("resuls of m1.rotateClockwise(); \n" + temp);
-//
-//		temp = m1.rotateCounterClockwise();
-//		System.out.println("resuls of m1.rotateCounterClockwise(); \n" + temp);
+
+
+		// MATRIX
+		System.out.println("\nTest Matrix:\n");
+		System.out.println("for Matrix m2 = new Matrix(3, 3); the toString of m2 is:");
+		Matrix m2 = new Matrix(3, 3);
+		System.out.println(m2);
+
+		System.out.println("\nfor a = { { 10, 30, 50 }, { 100, 150, 200 } };");
+		int[][] a = { { 10, 30, 50 }, { 100, 150, 200 } };
+		Matrix m1 = new Matrix(a);
+		System.out.println("\nfor Matrix m1 = new Matrix(a); the toString of m1 is:");
+		System.out.println(m1);
+		Matrix temp;
+
+		temp = m1.makeNegative();
+		System.out.println("resuls of m1.makeNegative(); \n" + temp);
+
+		temp = m1.imageFilterAverage();
+		System.out.println("resuls of m1.imageFilterAverage(); \n" + temp);
+
+		temp = m1.rotateClockwise();
+		System.out.println("resuls of m1.rotateClockwise(); \n" + temp);
+
+		temp = m1.rotateCounterClockwise();
+		System.out.println("resuls of m1.rotateCounterClockwise(); \n" + temp);
 
 	}// main
 }// class
