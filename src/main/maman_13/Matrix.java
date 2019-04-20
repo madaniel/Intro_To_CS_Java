@@ -1,10 +1,23 @@
 package main.maman_13;
 
+/**
+ * This class represents a two dimensional Matrix
+ *
+ *
+ * @author  Daniel Madar
+ * @version 1.0
+ * @since   21/4/2019
+ */
+
+
 public class Matrix {
 
     private int [] [] _matrixArray;
 
     public Matrix(int [] [] array){
+        /*
+        Constructor from two dimensional array
+         */
         this._matrixArray = new int[array.length][array[0].length];
 
         for(int row=0; row < array.length; row++)
@@ -13,6 +26,9 @@ public class Matrix {
     }
 
     public Matrix(int size1, int size2){
+        /*
+        Constructor from 2 int of size
+         */
         this._matrixArray = new int[size1][size2];
 
         for(int row=0; row < size1; row++)
@@ -21,6 +37,9 @@ public class Matrix {
     }
 
     public String toString(){
+        /*
+        To String method
+         */
         String result = "";
 
         for(int row = 0; row < _matrixArray.length; row++) {
@@ -36,6 +55,9 @@ public class Matrix {
     }
 
     public Matrix makeNegative(){
+        /*
+        Return Matrix with values of completion to 255
+         */
         int [][] negativeMatrix = _getMatrix(this._matrixArray);
 
         for(int row=0; row < negativeMatrix.length; row++)
@@ -46,6 +68,9 @@ public class Matrix {
     }
 
     public Matrix rotateCounterClockwise(){
+        /*
+        Rotate the Matrix counter clockwise
+         */
         int [][] rotatedClockwiseMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
 
         for(int row=0; row < this._matrixArray.length; row++)
@@ -56,6 +81,9 @@ public class Matrix {
     }
 
     public Matrix rotateClockwise(){
+        /*
+        Rotate the Matrix clockwise
+         */
         int [][] rotatedClockwiseMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
 
         for(int row=0; row < this._matrixArray.length; row++)
@@ -66,6 +94,9 @@ public class Matrix {
     }
 
     public Matrix imageFilterAverage(){
+        /*
+        Return Matrix with average value of neighbor cells
+         */
         int [][] imageFilterAverageMatrix = _getMatrix(new int [this._matrixArray.length][this._matrixArray[0].length]);
 
         for(int row=0; row < this._matrixArray.length; row++)
@@ -76,6 +107,7 @@ public class Matrix {
     }
 
     private int _getAllNeighborsAverage(int row, int col){
+        // Get all the surrounding cells values
         int [] neighbors = new int[9];
 
         neighbors[0] = _getNeighborValue(row, col +1); // right
@@ -104,6 +136,7 @@ public class Matrix {
 
 
     private int _getNeighborValue(int row, int col){
+        // Get value of neighbor cell avoiding index exceptions
         int value;
 
         try {
@@ -116,10 +149,8 @@ public class Matrix {
         return value;
     }
 
-
-
-
     private int [][] _getMatrix(int [][] matrixSource){
+        // Copy of Matrix
         int [][] matrixCopy = new int [matrixSource.length][matrixSource[0].length];
 
         for(int row=0; row < matrixCopy.length; row++)

@@ -7,7 +7,7 @@ import main.maman_12.Point3D;
  *
  *  @author  Daniel Madar
  *  @version 1.0
- *  @since   4/12/2019
+ *  @since   21/4/2019
  */
 
 public class Collection {
@@ -18,11 +18,17 @@ public class Collection {
     private int _numberOfBoxes;
 
     public Collection() {
+        /*
+        Constructor with null boxes
+         */
         this._boxes = new Box3D[MAX_NUM_BOXES];
         this._numberOfBoxes = 0;
     }
 
     public int totalSurfaceArea(){
+        /*
+        Get sum of all surfaces on the box
+         */
         int total = 0;
 
         for(int i=0; i < this._numberOfBoxes; i++)
@@ -32,6 +38,9 @@ public class Collection {
     }
 
     public double longestDistance(){
+        /*
+        Get the distance between 2 most far boxes center point
+         */
         if(this._numberOfBoxes < 2)
                 return 0;
 
@@ -39,6 +48,9 @@ public class Collection {
     }
 
     public int howManyContains(Box3D box){
+        /*
+        Get number of boxes which contain the argument box
+         */
         int counter = 0;
 
         for(int i=0; i < this._numberOfBoxes; i++)
@@ -71,6 +83,9 @@ public class Collection {
     }
 
     public Box3D [] getBoxes(){
+        /*
+        Get a copy of all the boxes on class attribute
+         */
         Box3D [] boxCopy = new Box3D[this._numberOfBoxes];
 
         for(int i=0; i < boxCopy.length; i++)
@@ -131,6 +146,9 @@ public class Collection {
     }
 
     public String toString(){
+        /*
+        To String method
+         */
         String result = "";
 
         for (int i=0; i < this._numberOfBoxes; i++){
@@ -142,10 +160,12 @@ public class Collection {
     }
 
     private boolean _isSubArrayLegal(int i, int j){
+        // Checking if the indexes are pointing on legal array
         return i > -1 && j < this._numberOfBoxes;
     }
 
     private Box3D [] _getSubArray(int i, int j){
+        // Copying sub array
         Box3D [] subArray = new Box3D[j -i + 1];
 
         for(int x=0; x < subArray.length; x++){
