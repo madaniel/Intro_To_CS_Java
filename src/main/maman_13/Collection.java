@@ -35,15 +35,40 @@ public class Collection {
         if(this._numberOfBoxes < 2)
                 return 0;
 
-        return _getMinCenterPoint(this._boxes).distance(_getMaxCenterPoint(this._boxes));
+        return _getMinCenterPoint(getBoxes()).distance(_getMaxCenterPoint(getBoxes()));
     }
 
-    public int howManyContains(){
-        return 0;
+    public int howManyContains(Box3D box){
+        int counter = 0;
+
+        for(int i=0; i < this._numberOfBoxes; i++)
+            if(this._boxes[i].contains(box))
+                counter += 1;
+
+        return counter;
     }
 
-    public int volumeOfSmallerBox(){
-        return 0;
+    public int volumeOfSmallestBox(int i, int j){
+        /*
+        Returns the smallest volume of box which contain all the boxes in sub array from i to j indexes
+         */
+
+        if(!_isSubArrayLegal(i, j))
+            return 0;
+
+        int start = i <= j ? i : j;
+        int end = i <= j ? j : i;
+
+        // Copy the sub array
+        Box3D [] subArray = _getSubArray(start, end);
+
+        // Taking the highest dimension for each box in sub array
+        int [] highestDimensions = _getHighestDimensions(subArray);
+
+        // Calculating the volume of this box
+        Box3D tempBox = new Box3D(new Point3D(0, 0, 0), highestDimensions[0] + 1, highestDimensions[1] + 1, highestDimensions[2] + 1);
+
+        return tempBox.getVolume();
     }
 
     public Box3D [] getBoxes(){
@@ -111,13 +136,50 @@ public class Collection {
         return result;
     }
 
+    private boolean _isSubArrayLegal(int i, int j){
+        return i > -1 && j < this._numberOfBoxes;
+    }
+
+    private Box3D [] _getSubArray(int i, int j){
+        Box3D [] subArray = new Box3D[j -i + 1];
+
+        for(int x=0; x < subArray.length; x++){
+            subArray[x] = new Box3D(this._boxes[i]);
+            i ++;
+        }
+
+        return subArray;
+    }
+
+    private int [] _getHighestDimensions(Box3D [] boxesArray){
+        /*
+        Return highest dimensions for the given box array
+         */
+        int highestHeight = 0;
+        int highestWidth = 0;
+        int highestLength = 0;
+
+        for(int i=0; i < boxesArray.length; i++){
+            if(boxesArray[i].getHeight() > highestHeight)
+                highestHeight = boxesArray[i].getHeight();
+
+            if(boxesArray[i].getWidth() > highestWidth)
+                highestWidth = boxesArray[i].getWidth();
+
+            if(boxesArray[i].getLength() > highestLength)
+                highestLength = boxesArray[i].getLength();
+        }
+
+        return new int[]{highestLength, highestWidth, highestHeight};
+    }
+
     private Point3D _getMinCenterPoint(Box3D [] boxesArray){
         /*
         Return the minimum sum of center point in array
-        */
+         */
         int minIndex = 0;
 
-        for(int i=1; i < this._numberOfBoxes; i++)
+        for(int i=1; i < boxesArray.length; i++)
             if (_sumOfPoint(boxesArray[i].getCenter()) < _sumOfPoint(boxesArray[minIndex].getCenter()))
                 minIndex = i;
 
@@ -130,7 +192,7 @@ public class Collection {
         */
         int maxIndex = 0;
 
-        for(int i=1; i < this._numberOfBoxes; i++)
+        for(int i=1; i < boxesArray.length; i++)
             if (_sumOfPoint(boxesArray[i].getCenter()) > _sumOfPoint(boxesArray[maxIndex].getCenter()))
                 maxIndex = i;
 

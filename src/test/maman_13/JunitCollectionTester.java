@@ -98,6 +98,29 @@ class JunitCollectionTester {
 
     @Test
     void testVolumeOfSmallerBox(){
+
+        base = new Point3D(0, 0, 0);
+        Box3D a = new Box3D(base, 1, 2, 3);
+        Box3D b = new Box3D(base, 3, 2, 1);
+        Box3D c = new Box3D(base, 3, 3, 3);
+        Box3D d = new Box3D(base, 4, 3, 3);
+        Box3D e = new Box3D(base, 1, 1, 1);
+        Box3D f = new Box3D(base, 5, 4, 4);
+
+        testCollection1.addBox(a);
+        testCollection1.addBox(b);
+        testCollection1.addBox(c);
+        testCollection1.addBox(d);
+        testCollection1.addBox(e);
+
+
+        int expectedVolume = f.getVolume();
+        assertEquals(0, testCollection1.volumeOfSmallestBox(0, 5));
+        assertEquals(0, testCollection1.volumeOfSmallestBox(0, 100));
+        assertEquals(0, testCollection1.volumeOfSmallestBox(0, 5));
+        assertEquals(0, testCollection1.volumeOfSmallestBox(-1, 4));
+
+        assertEquals(expectedVolume, testCollection1.volumeOfSmallestBox(0, 4));
     }
 
     @Test
