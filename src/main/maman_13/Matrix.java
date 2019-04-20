@@ -55,6 +55,16 @@ public class Matrix {
         return rotatedClockwiseMatrix;
     }
 
+    public int [][] rotateClockwise(){
+        int [][] rotatedClockwiseMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
+
+        for(int row=0; row < this._matrixArray.length; row++)
+            for(int col=0; col < this._matrixArray[0].length; col++)
+                rotatedClockwiseMatrix[col][this._matrixArray.length -1 - row] = this._matrixArray[row][col];
+
+        return rotatedClockwiseMatrix;
+    }
+
     private int [][] _getMatrix(int [][] matrixSource){
         int [][] matrixCopy = new int [matrixSource.length][matrixSource[0].length];
 
