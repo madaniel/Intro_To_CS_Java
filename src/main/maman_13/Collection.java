@@ -104,7 +104,7 @@ public class Collection {
     return this._boxes[maxBaseIndex];
     }
 
-    public boolean addBox(Box3D box){
+    public boolean addBox(Point3D base, int length, int width, int height){
         /*
           This method will push box into the Collection, based on its dimensions.
           The insertion will keep the collection sorted - small to large box
@@ -113,6 +113,8 @@ public class Collection {
         // The collection is full
         if (this._numberOfBoxes == MAX_NUM_BOXES)
             return false;
+
+        Box3D box = new Box3D(base, length, width, height);
 
         int indexToAdd = _findIndexToAdd(box);
 

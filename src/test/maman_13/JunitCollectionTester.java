@@ -34,16 +34,15 @@ class JunitCollectionTester {
     @Test
     void testAddBox() {
         for(int i=1; i <= MAX_NUM_BOXES; i++){
-            Box3D b1 = new Box3D(base, 1, 1, i);
-            assertTrue(testCollection1.addBox(b1));
+
+            assertTrue(testCollection1.addBox(base, 1, 1, i));
         }
 
-        Box3D b1 = new Box3D(base, 1, 1, 1);
-        assertFalse(testCollection1.addBox(b1));
+        assertFalse(testCollection1.addBox(base, 1, 1, 1));
 
         for(int i=MAX_NUM_BOXES; i > 0 ; i--){
-            Box3D b2 = new Box3D(base, 1, 1, i);
-            assertTrue(testCollection2.addBox(b2));
+
+            assertTrue(testCollection2.addBox(base, 1, 1, i));
         }
 
         assertEquals(testCollection1.toString(), testCollection2.toString());
@@ -55,28 +54,26 @@ class JunitCollectionTester {
         Box3D b1 = new Box3D();
         base = new Point3D();
 
-        for(int i=1; i <= 10; i++){
-            base = new Point3D(0, 0, i);
-            b1 = new Box3D(base, 1, 1, 1);
-            assertTrue(testCollection1.addBox(b1));
-        }
-        assertEquals(b1.toString(), testCollection1.mostUpperBaseCorner().toString());
+        for(int i=1; i <= 10; i++)
+            assertTrue(testCollection1.addBox(new Point3D(0, 0, i),1, 1, 1));
 
         base = new Point3D(0.0, 0.0, 100);
         Box3D b2 = new Box3D(base, 1, 1, 1);
-        testCollection1.addBox(b2);
+        assertEquals(b1.toString(), testCollection1.mostUpperBaseCorner().toString());
+
+        testCollection1.addBox(new Point3D(0.0, 0.0, 100), 1, 1, 1);
         assertEquals(b2.toString(), testCollection1.mostUpperBaseCorner().toString());
     }
 
     @Test
     void testTotalSurfaceArea(){
         for(int i=0; i < 3; i++){
-            testCollection1.addBox(new Box3D());
+            testCollection1.addBox(new Point3D(), 1, 1, 1);
         }
         assertEquals(6*3, testCollection1.totalSurfaceArea());
 
         for(int i=0; i < 3; i++){
-            testCollection1.addBox(new Box3D(base, 2, 2, 2));
+            testCollection1.addBox(new Point3D(), 2, 2, 2);
         }
         assertEquals(6*3+6*2*2*3, testCollection1.totalSurfaceArea());
     }
@@ -85,10 +82,9 @@ class JunitCollectionTester {
     void testLongestDistance(){
         assertEquals(0,testCollection1.longestDistance());
 
-        for(int i=0; i < 5; i++){
-            base = new Point3D(i, i, i);
-            testCollection1.addBox(new Box3D(base, 2, 2, 2));
-        }
+        for(int i=0; i < 5; i++)
+            testCollection1.addBox(new Point3D(i, i, i), 2, 2, 2);
+
         assertEquals(testCollection1.getBoxes()[0].distance(testCollection1.getBoxes()[4]),testCollection1.longestDistance());
     }
 
@@ -100,19 +96,14 @@ class JunitCollectionTester {
     void testVolumeOfSmallerBox(){
 
         base = new Point3D(0, 0, 0);
-        Box3D a = new Box3D(base, 1, 2, 3);
-        Box3D b = new Box3D(base, 3, 2, 1);
-        Box3D c = new Box3D(base, 3, 3, 3);
-        Box3D d = new Box3D(base, 4, 3, 3);
-        Box3D e = new Box3D(base, 1, 1, 1);
-        Box3D f = new Box3D(base, 5, 4, 4);
 
-        testCollection1.addBox(a);
-        testCollection1.addBox(b);
-        testCollection1.addBox(c);
-        testCollection1.addBox(d);
-        testCollection1.addBox(e);
+        Box3D f = new Box3D (base, 5, 4, 4);
 
+        testCollection1.addBox(base, 1, 2, 3);
+        testCollection1.addBox(base, 3, 2, 1);
+        testCollection1.addBox(base, 3, 3, 3);
+        testCollection1.addBox(base, 4, 3, 3);
+        testCollection1.addBox(base, 1, 1, 1);
 
         int expectedVolume = f.getVolume();
         assertEquals(0, testCollection1.volumeOfSmallestBox(0, 5));
@@ -125,9 +116,9 @@ class JunitCollectionTester {
 
     @Test
     void testGetBoxes(){
-        for(int i=0; i < 1; i++){
-            testCollection1.addBox(new Box3D());
-        }
+        for(int i=0; i < 1; i++)
+            testCollection1.addBox(new Point3D(), 0, 0, 0);
+
         testCollection1.getBoxes();
     }
 }
