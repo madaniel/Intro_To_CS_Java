@@ -40,6 +40,26 @@ public class JunitMatrixTester {
         assertEquals(expected1, matrix1.toString());
         assertEquals(expected2, matrix2.toString());
     }
+
+    @Test
+    void testMakeNegative(){
+        String expected1 =
+                "255" + "\t" + "255" + "\t" + "255" + "\n" +
+                        "255" + "\t" + "255" + "\t" + "255" + "\n" +
+                        "255" + "\t" + "255" + "\t" + "255" + "\n";
+        String expected2 =
+                "254" + "\t" + "253" + "\t" + "252" + "\n" +
+                        "254" + "\t" + "253" + "\t" + "252" + "\n" +
+                        "254" + "\t" + "253" + "\t" + "252" + "\n";
+
+        Matrix matrixNegative1 = new Matrix(matrix1.makeNegative());
+        Matrix matrixNegative2 = new Matrix(matrix2.makeNegative());
+
+        assertEquals(expected1, matrixNegative1.toString());
+        assertEquals(expected2, matrixNegative2.toString());
+    }
+
+
 }
 
 
