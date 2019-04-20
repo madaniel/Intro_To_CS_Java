@@ -45,6 +45,16 @@ public class Matrix {
         return negativeMatrix;
     }
 
+    public int [][] rotateCounterClockwise(){
+        int [][] rotatedClockwiseMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
+
+        for(int row=0; row < this._matrixArray.length; row++)
+            for(int col=0; col < this._matrixArray[0].length; col++)
+                rotatedClockwiseMatrix[col][row] = this._matrixArray[row][this._matrixArray[0].length - 1 - col];
+
+        return rotatedClockwiseMatrix;
+    }
+
     private int [][] _getMatrix(int [][] matrixSource){
         int [][] matrixCopy = new int [matrixSource.length][matrixSource[0].length];
 
@@ -55,15 +65,13 @@ public class Matrix {
         return matrixCopy;
     }
 
-//    public Matrix imageFilterAverage(){
+//    public int [][] imageFilterAverage(){
 //
 //    }
 //
-//    public Matrix rotateClockwise(){
+
 //
-//    }
-//
-//    public Matrix rotateCounterClockwise(){
+//    public int [][] rotateCounterClockwise(){
 //
 //    }
 
