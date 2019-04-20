@@ -65,6 +65,60 @@ public class Matrix {
         return new Matrix(rotatedClockwiseMatrix);
     }
 
+    public Matrix imageFilterAverage(){
+        int [][] imageFilterAverageMatrix = _getMatrix(new int [this._matrixArray[0].length][this._matrixArray.length]);
+
+        for(int row=0; row < this._matrixArray.length; row++)
+            for(int col=0; col < this._matrixArray[0].length; col++)
+                imageFilterAverageMatrix[row][col] = _getAllNeighborsAverage(row, col);
+
+        return new Matrix(imageFilterAverageMatrix);
+    }
+
+    private int _getAllNeighborsAverage(int row, int col){
+        int [] neighbors = new int[9];
+
+        neighbors[0] = _getNeighborValue(row, col +1); // right
+        neighbors[1] = _getNeighborValue(row + 1, col +1);  // rightDown
+        neighbors[2] = _getNeighborValue(row + 1, col);  // down
+        neighbors[3] = _getNeighborValue(row + 1, col -1); // downLeft
+        neighbors[4] = _getNeighborValue(row, col -1);  // left
+        neighbors[5] = _getNeighborValue(row - 1, col -1);  // leftUp
+        neighbors[6] = _getNeighborValue(row - 1, col);  // up
+        neighbors[7] = _getNeighborValue(row - 1, col + 1);  // upRight
+        neighbors[8] = this._matrixArray[row][col];
+
+        int count = 0;
+        double sum = 0;
+
+        for(int i=0; i < neighbors.length; i++)
+            // only if neighbor does exist
+            if(neighbors[i] != -1){
+                count++;
+                sum += neighbors[i];
+            }
+
+        return (int)Math.floor(sum / count);
+    }
+
+
+
+    private int _getNeighborValue(int row, int col){
+        int value;
+
+        try {
+            value = this._matrixArray[row][col];
+        }
+        catch(IndexOutOfBoundsException e) {
+            value = -1;
+        }
+
+        return value;
+    }
+
+
+
+
     private int [][] _getMatrix(int [][] matrixSource){
         int [][] matrixCopy = new int [matrixSource.length][matrixSource[0].length];
 
@@ -74,16 +128,4 @@ public class Matrix {
 
         return matrixCopy;
     }
-
-//    public int [][] imageFilterAverage(){
-//
-//    }
-//
-
-//
-//    public int [][] rotateCounterClockwise(){
-//
-//    }
-
-
 }

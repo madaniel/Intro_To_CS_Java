@@ -136,6 +136,28 @@ class JunitMatrixTester {
         assertEquals(expected4, matrixRotateClockwise4.toString());
     }
 
+    @Test
+    void testImageFilterAverage(){
+        int[][] matArray5 = {{19, 124, 28, 35, 38}, {115, 22, 25, 230, 31}, {9, 21, 22, 249, 230}, {0, 6, 9, 232, 255}, {2, 5, 10, 116, 129}};
+        int[][] matArray6 = {{70, 55, 77, 64, 83}, {51, 42, 84, 98, 135}, {28, 25, 90, 142, 204}, {7, 9, 74, 139, 201}, {3, 5, 63, 125, 183}};
+        int[][] matArray7 = {{3, 3, 3}, {3, 3, 3}, {3, 3, 3}};
+        int[][] matArray8 = {{5, 10, 5}, {10, 5, 10}, {5, 10, 5}};
+        int[][] matArray9 = {{7, 7, 7}, {7, 7, 7}, {7, 7, 7}};
+
+
+        Matrix matrixImageFilterAverageActual1 = new Matrix(matArray5).imageFilterAverage();
+        Matrix matrixImageFilterAverageExpected1 = new Matrix(matArray6);
+
+        Matrix matrixImageFilterAverageActual2 = new Matrix(matArray7).imageFilterAverage();
+        Matrix matrixImageFilterAverageExpected2 = new Matrix(matArray7);
+
+        assertEquals(matrixImageFilterAverageExpected1.toString(), matrixImageFilterAverageActual1.toString());
+        assertEquals(matrixImageFilterAverageExpected2.toString(), matrixImageFilterAverageActual2.toString());
+
+        Matrix matrixImageFilterAverageActual3 = new Matrix(matArray8).imageFilterAverage();
+        Matrix matrixImageFilterAverageExpected3 = new Matrix(matArray9);
+        assertEquals(matrixImageFilterAverageExpected3.toString(), matrixImageFilterAverageActual3.toString());
+    }
 }
 
 
