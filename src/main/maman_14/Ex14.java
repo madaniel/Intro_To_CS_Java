@@ -12,6 +12,8 @@ public class Ex14 {
     /**
      * Question 1:
      * Return volume of water can accumulate between array of heights
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
      * @param height array of heights
      * @return amount of water
      */
@@ -30,6 +32,8 @@ public class Ex14 {
         int leftIndex = 1;
         int rightIndex = heights.length-2;
 
+        // Find max height from the left and max height from the right
+        // For each index we set the current max on both maxLists
         while(leftIndex <= heights.length && rightIndex >=0){
             leftMax = Math.max(leftMax, heights[leftIndex-1]);
             leftMaxList[leftIndex] = leftMax;
@@ -44,6 +48,7 @@ public class Ex14 {
         int waterPerCell;
         int actualWaterPerCell;
 
+        // Calc waterSum as diff between height and the min from both maxes
         for(int i=0; i<heights.length; i++){
             waterPerCell = Math.min(leftMaxList[i], rightMaxList[i]);
             actualWaterPerCell = Math.max(0, waterPerCell - heights[i]);
@@ -55,7 +60,9 @@ public class Ex14 {
 
     /**
      * Question 2:
-     * Return the last index of the even sum in array
+     * Method what - returns the length of longest even sub array
+     * Original what Time Complexity: O(n^3)
+     * New what Time Complexity: O(n) - we iterate only constant times on the array
      * @param a array of int, positive and negative
      * @return length of longest sub array of positive numbers
      */
