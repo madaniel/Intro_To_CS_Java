@@ -90,6 +90,9 @@ public class Ex14 {
         }
 
     private static int solutions(int num, int x1, int x2, int x3, int[][] recordList){
+        if(num < 3)
+            return 0;
+
         int [] arrayX = {x1, x2, x3};
 
         if(x1 > 10 || x2 > 10 || x3 > 10 || isArrayIn(arrayX, recordList))
@@ -111,9 +114,13 @@ public class Ex14 {
      * @return found or not found
      */
     private static boolean isArrayIn(int [] array, int [][] mat){
+        int [] emptyCell = {0, 0, 0};
+
         for(int i=0; i<mat.length; i++)
             if(Arrays.equals(array, mat[i]))
                 return true;
+            else if(Arrays.equals(emptyCell, mat[i]))
+                return false;
 
         return false;
         }
@@ -124,11 +131,14 @@ public class Ex14 {
      * @param mat target matrix
      */
     private static void append(int [] array, int [][] mat){
-        for(int i=0; i<mat.length; i++){
-            if(mat[i] != null)
-                continue;
-            mat[i] = array;
-            }
+        int [] emptyCell = {0, 0, 0};
+        int i=0;
+
+        // Search for last empty cell
+        while (!Arrays.equals(emptyCell, mat[i]))
+            i ++;
+
+        mat[i] = array;
         }
 
     /**
