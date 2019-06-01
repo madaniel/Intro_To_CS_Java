@@ -149,7 +149,7 @@ public class Ex14 {
      * @param path matrix of 0 to mark the path of sum with 1
      * @return true - if sum found false - sum not found in matrix
      */
-    public static boolean findSum (int mat[][], int sum, int path[][]){
+    public static boolean findSum (int [][] mat, int sum, int [][] path){
         return findSumIterator(mat, path, sum, 0, 0);
         }
 
