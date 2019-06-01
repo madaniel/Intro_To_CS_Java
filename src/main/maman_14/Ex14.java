@@ -15,7 +15,6 @@ public class Ex14 {
      * @param height array of heights
      * @return amount of water
      */
-
     public static int waterVolume(int [] heights){
         // Waters cannot accumulate on the edges
         if (heights.length < 3)
@@ -53,31 +52,6 @@ public class Ex14 {
 
         return waterSum;
         }
-
-    private static int f (int[]a, int low, int high) {
-        int res = 0;
-        for (int i = low; i <= high; i++)
-            res += a[i];
-        return res;
-    }
-
-    public static int whatOld(int[]a){
-        int temp = 0;
-
-        for (int i=0; i < a.length; i++){
-
-            for (int j=i; j<a.length; j++){
-
-                int c = f(a, i, j);
-                if (c % 2 == 0){
-                    if (j-i+1 > temp)
-                        temp = j-i+1;
-                }
-            }
-        }
-
-        return temp;
-    }
 
     /**
      * Question 2:
@@ -119,8 +93,6 @@ public class Ex14 {
 
         return Math.max(rightLengthEvenSum, leftLengthEvenSum);
         }
-
-
 
     /**
      * Question 3:

@@ -26,39 +26,30 @@ public class JunitEx14Tester {
     void testWhat() {
         int [] test1 = {2, 4, 6};
         assertEquals(3, Ex14.what(test1));
-        assertEquals(3, Ex14.whatOld(test1));
 
         int [] test2 = {2, 4, 6, 1};
         assertEquals(3, Ex14.what(test2));
-        assertEquals(3, Ex14.whatOld(test2));
 
         int [] test3 = {-2, -4, 6, 8, 10, 1};
         assertEquals(5, Ex14.what(test3));
-        assertEquals(5, Ex14.whatOld(test3));
 
         int [] test5 = {1};
         assertEquals(0, Ex14.what(test5));
-        assertEquals(0, Ex14.whatOld(test5));
 
         int [] test6 = {};
         assertEquals(0, Ex14.what(test6));
-        assertEquals(0, Ex14.whatOld(test6));
 
         int [] test7 = {1, 5, 7, 9};
         assertEquals(4, Ex14.what(test7));
-        assertEquals(4, Ex14.whatOld(test7));
 
         int [] test75 = {3, 5, 7, 4, 6, 8};
-        assertEquals(5, Ex14.whatOld(test75));
         assertEquals(5, Ex14.what(test75));
 
 
 
         int [] test8 ={19, 73, 65, -69, 37, 98, 93, -89, 20, -31, 63, -14, -87, 49, 41, 19, 22, 64};
-        assertEquals(17, Ex14.whatOld(test8));
         assertEquals(17, Ex14.what(test8));
         int[] test9 = {4, 38, 21, 82, 35, 7, 51, -10, 26, 56, 49, -67, 44, 87, 84, 5, -51, 70};
-        assertEquals(16, Ex14.whatOld(test9));
         assertEquals(16, Ex14.what(test9));
 
     }
