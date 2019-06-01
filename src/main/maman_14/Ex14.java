@@ -54,30 +54,73 @@ public class Ex14 {
         return waterSum;
         }
 
+    private static int f (int[]a, int low, int high) {
+        int res = 0;
+        for (int i = low; i <= high; i++)
+            res += a[i];
+        return res;
+    }
+
+    public static int whatOld(int[]a){
+        int temp = 0;
+
+        for (int i=0; i < a.length; i++){
+
+            for (int j=i; j<a.length; j++){
+
+                int c = f(a, i, j);
+                if (c % 2 == 0){
+                    if (j-i+1 > temp)
+                        temp = j-i+1;
+                }
+            }
+        }
+
+        return temp;
+    }
+
     /**
      * Question 2:
-     * Return the last index of the positive sum in array
+     * Return the last index of the even sum in array
      * @param a array of int, positive and negative
-     * @return last index of positive sum
+     * @return length of longest sub array of positive numbers
      */
     public static int what(int[] a){
-        int lastIndex = a.length;
         int sum = 0;
+        int maxLengthEvenSum = a.length;
 
-        // Looping over array a to find the total sum
         for(int i=0; i < a.length; i++)
             sum += a[i];
 
-        // Decrementing sum from last index until sum gets odd
-        for(int i=a.length-1; i >= 0; i--) {
-            if (sum % 2 == 0)
-                break;
-            sum -= a[i];
-            lastIndex -= 1;
+        // Sum is even
+        if (sum % 2 == 0)
+            return maxLengthEvenSum;
+
+        // Sum is odd
+        // We need to find first odd number in array from right and left
+        int rightSum = sum;
+        int leftSum = sum;
+        int rightLengthEvenSum = maxLengthEvenSum;
+        int leftLengthEvenSum = maxLengthEvenSum;
+        int leftIndex = 0;
+        int rightIndex = a.length-1;
+
+        while(rightSum %2 != 0 && rightIndex >= 0){
+            rightSum -= a[rightIndex];
+            rightIndex --;
+            rightLengthEvenSum --;
+            }
+
+        while(leftSum %2 != 0 && leftIndex < a.length){
+            leftSum -= a[leftIndex];
+            leftIndex ++;
+            leftLengthEvenSum --;
+            }
+
+        return Math.max(rightLengthEvenSum, leftLengthEvenSum);
         }
 
-        return lastIndex;
-        }
+
 
     /**
      * Question 3:
