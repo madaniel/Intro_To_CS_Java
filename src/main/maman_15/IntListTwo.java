@@ -62,19 +62,36 @@ public class IntListTwo {
         return "";
     }
 
+    /**
+     * Returns the number of the numbers in the list
+     * @return number of numbers in the list
+     */
     public int length(){
         return 0;
     }
 
+    /**
+     * Returns the sum of the numbers in the list
+     * @return sum of the numbers in the list
+     */
     public int sum(){
         return 0;
 
     }
 
+    /**
+     * Returns the length of the longest sub-array even sum
+     * @return length of the longest sub-array even sum
+     */
     public int maxLength(){
         return 0;
     }
 
+    /**
+     * Returns true if there's sub-array with average num
+     * @param num real num
+     * @return true if there's sub-array with average num, false otherwise
+     */
     public boolean isAverage(double num){
         return false;
     }
