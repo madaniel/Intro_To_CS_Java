@@ -47,7 +47,37 @@ public class IntListTwo {
      * @param num number to remove
      */
     public void removeNumber(int num){
+        // Looking for target number
+        IntNodeTwo pointer;
+        for(pointer = this._head; pointer != null && pointer.getNum() != num ; pointer = pointer.getNext());
 
+        // Either List is empty or number not found
+        if(pointer == null);
+
+        // Number is single in list, we detach the head
+        else if(this.isSingle(pointer))
+            this._head = null;
+
+        // Number is first in list, head will point 2nd number and its previous will detach
+        else if(this.isFirst(pointer)){
+            IntNodeTwo nextNumber = pointer.getNext();
+            this._head = nextNumber;
+            nextNumber.setPrev(null);
+        }
+
+        // Number is last in list
+        else if(this.isLast(pointer)){
+            IntNodeTwo prev = pointer.getPrev();
+            prev.setNext(null);
+        }
+
+        // Number is in the middle, we attach previous node to next one and next one to previous
+        else if(this.isInBetween(pointer)){
+            IntNodeTwo prev = pointer.getPrev();
+            IntNodeTwo next = pointer.getNext();
+            prev.setNext(next);
+            next.setPrev(prev);
+        }
     }
 
     /**
@@ -94,6 +124,26 @@ public class IntListTwo {
      */
     public boolean isAverage(double num){
         return false;
+    }
+
+    private boolean isSingle(IntNodeTwo nodePointer){
+        return this._head == nodePointer && nodePointer.getNext() == null;
+    }
+
+    private boolean isFirst(IntNodeTwo nodePointer){
+        return this._head == nodePointer && nodePointer.getNext() != null;
+    }
+
+    private boolean isLast(IntNodeTwo nodePointer){
+        return nodePointer.getNext() == null && nodePointer.getPrev() != null;
+    }
+
+    private boolean isInBetween(IntNodeTwo nodePointer){
+        return nodePointer.getNext() != null && nodePointer.getPrev() != null;
+    }
+
+    private boolean isListEmpty(){
+        return this._head == null;
     }
 
 }
