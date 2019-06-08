@@ -37,6 +37,8 @@ public class IntListTwo {
 
     /**
      * Will add number to the list by increasing order
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
      * @param num number to add
      */
     public void addNumber(int num){
@@ -95,6 +97,8 @@ public class IntListTwo {
 
     /**
      * Will remove number from the list, keeping the order
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
      * @param num number to remove
      */
     public void removeNumber(int num){
@@ -137,6 +141,8 @@ public class IntListTwo {
     /**
      * Reads from the user list of int numbers until number -9999
      * The numbers will be added to the list
+     * Time Complexity: O(n log n)
+     * Space Complexity: O(1)
      */
     public void readToList(){
         Scanner scan = new Scanner(System.in);
@@ -183,6 +189,8 @@ public class IntListTwo {
 
     /**
      * Returns the number of the numbers in the list
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
      * @return number of numbers in the list
      */
     public int length(){
@@ -197,6 +205,8 @@ public class IntListTwo {
 
     /**
      * Returns the sum of the numbers in the list
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
      * @return sum of the numbers in the list
      */
     public int sum(){
@@ -211,6 +221,8 @@ public class IntListTwo {
 
     /**
      * Returns the length of the longest sub-array even sum
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
      * @return length of the longest sub-array even sum
      */
     public int maxLength(){
@@ -251,6 +263,8 @@ public class IntListTwo {
 
     /**
      * Returns true if there's sub-array with average num
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
      * @param num real num
      * @return true if there's sub-array with average num, false otherwise
      */
@@ -286,6 +300,8 @@ public class IntListTwo {
 
     /**
      * Add number to the top of the list unsorted
+     * Time Complexity: O(1)
+     * Space Complexity: O(1)
      * @param num number to add
      */
     private void pushNumber(int num){
@@ -306,22 +322,42 @@ public class IntListTwo {
         }
     }
 
+    /*
+     * Time Complexity: O(1)
+     * Space Complexity: O(1)
+     */
     private boolean isSingle(IntNodeTwo nodePointer){
         return this._head == nodePointer && this._tail == nodePointer;
     }
 
+    /*
+     * Time Complexity: O(1)
+     * Space Complexity: O(1)
+     */
     private boolean isFirst(IntNodeTwo nodePointer){
         return this._head == nodePointer && this._tail != nodePointer;
     }
 
+    /*
+     * Time Complexity: O(1)
+     * Space Complexity: O(1)
+     */
     private boolean isLast(IntNodeTwo nodePointer){
         return this._head != nodePointer && this._tail == nodePointer;
     }
 
+    /*
+     * Time Complexity: O(1)
+     * Space Complexity: O(1)
+     */
     private boolean isInBetween(IntNodeTwo nodePointer){
         return nodePointer.getNext() != null && nodePointer.getPrev() != null;
     }
 
+    /*
+     * Time Complexity: O(1)
+     * Space Complexity: O(1)
+     */
     private boolean isListEmpty(){
         return this._head == null && this._tail == null;
     }
