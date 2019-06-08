@@ -50,6 +50,14 @@ public class IntListTwo {
             return;
         }
 
+        // newNum should be first
+        if(num <= this._head.getNum()){
+            newNum.setNext(this._head);
+            this._head.setPrev(newNum);
+            this._head = newNum;
+            return;
+        }
+
         // List is not empty
         for(pointer = this._head; pointer.getNext() != null && pointer.getNum() < num ; pointer = pointer.getNext());
 
