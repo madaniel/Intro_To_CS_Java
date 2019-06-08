@@ -53,7 +53,7 @@ public class IntListTwo {
         // List is not empty
         for(pointer = this._head; pointer.getNext() != null && pointer.getNum() < num ; pointer = pointer.getNext());
 
-        // newNum should be first
+        // newNum should be first, List is with one node
         if(isSingle(pointer) && num <= pointer.getNum()){
             newNum.setNext(pointer);
             pointer.setPrev(newNum);
@@ -61,25 +61,27 @@ public class IntListTwo {
             this._tail = pointer;
         }
 
-        // newNum should be second
+        // newNum should be second, List is with one node
         else if(isSingle(pointer) && num > pointer.getNum()){
             newNum.setPrev(pointer);
             pointer.setNext(newNum);
             this._tail = newNum;
         }
 
-        // newNum should be last
+        // newNum should be last, pointer is on the end of list
         else if(isLast(pointer) && num > pointer.getNum()){
-            newNum.setPrev(newNum);
+            newNum.setPrev(pointer);
             pointer.setNext(newNum);
-            this._tail = pointer;
+            this._tail = newNum;
         }
 
-        // newNum should be in between
+        // newNum should be in between, pointer is on the node after the newNum
         else {
             IntNodeTwo prev = pointer.getPrev();
-            pointer.setPrev(newNum);
             prev.setNext(newNum);
+            newNum.setNext(pointer);
+            pointer.setPrev(newNum);
+            newNum.setPrev(prev);
         }
     }
 
@@ -141,17 +143,30 @@ public class IntListTwo {
         }
         System.out.println("Done");
 
-        // Sorting the list using MergeSort
+        // Sorting the list using MergeSort from the slides
         mergeSort();
+
+        // Setting prev for all nodes in list
+        IntNodeTwo pointer, prev = null;
+
+        for(pointer=this._head; pointer !=null; pointer = pointer.getNext()){
+            pointer.setPrev(prev);
+            prev = pointer;
+        }
+        this._tail = prev;
     }
 
     public String toString(){
         IntNodeTwo pointer;
+        if(isListEmpty())
+            return "{}";
+
         String listString = "{";
 
         for(pointer = this._head; pointer != null; pointer = pointer.getNext())
             listString += pointer.getNum() + ", ";
 
+        listString = listString.substring(0, listString.length() - 2);
         listString += "}";
 
         return listString;
@@ -205,7 +220,7 @@ public class IntListTwo {
         // Iterate from the right, decreasing value until the sum is even
         int tmpSum = sum, rightLength = count;
 
-        while(tmpSum % 2 != 0){
+        while(tmpSum % 2 != 0 && rightPointer != null){
             tmpSum -= rightPointer.getNum();
             rightLength --;
             rightPointer = rightPointer.getPrev();
@@ -216,7 +231,7 @@ public class IntListTwo {
         int leftLength = count;
         tmpSum = sum;
 
-        while(tmpSum % 2 != 0){
+        while(tmpSum % 2 != 0 && leftPointer != null){
             tmpSum -= leftPointer.getNum();
             leftPointer = leftPointer.getNext();
             leftLength --;
@@ -240,7 +255,7 @@ public class IntListTwo {
         double average = sum /(double)count;
 
         // Increasing or decreasing the average to find the target num
-        while(leftPointer != rightPointer || num != average){
+        while(leftPointer != rightPointer && num != average){
 
             if(average < num){
                 sum -= leftPointer.getNum();
@@ -302,52 +317,48 @@ public class IntListTwo {
         return this._head == null && this._tail == null;
     }
 
-    private IntNodeTwo merge(IntNodeTwo node1, IntNodeTwo node2){
-        if(node1 == null)
-            return node2;
+    private void mergeSort() {
+        _head = mergeSort (_head);
+    }
 
-        if(node2 == null)
-            return node1;
+    private IntNodeTwo mergeSort (IntNodeTwo node) {
 
-        if(node1.getNum() < node2.getNum()){
-            node1.setNext(merge(node1, node2.getNext()));
-            IntNodeTwo next = node1.getNext();
-            next.setPrev(node1);
-            return node1;
+        if (node == null || node.getNext() == null)
+            return node;
+
+        IntNodeTwo list2 = split(node);
+        node = mergeSort (node);
+        list2 = mergeSort(list2);
+
+        return merge(node, list2);
+    }
+
+    private IntNodeTwo split(IntNodeTwo node) {
+        if (node == null || node.getNext() == null)
+            return null;
+
+        IntNodeTwo list2 = node.getNext();
+        node.setNext (list2.getNext());
+        list2.setNext (split(list2.getNext()));
+        return list2;
+
+    }
+
+    private IntNodeTwo merge(IntNodeTwo list1, IntNodeTwo list2) {
+
+        if (list1 == null)
+            return list2;
+        if (list2 == null)
+            return list1;
+
+        if (list1.getNum() < list2.getNum()) {
+            list1.setNext(merge(list1.getNext(), list2));
+            return list1;
         }
 
         else {
-            node2.setNext(merge(node1, node2.getNext()));
-            IntNodeTwo next = node2.getNext();
-            next.setPrev(node2);
-            return node2;
+            list2.setNext(merge(list1, list2.getNext()));
+            return list2;
         }
-    }
-
-    private IntNodeTwo split(IntNodeTwo node){
-        if(node == null || node.getNext() == null)
-            return null;
-
-        IntNodeTwo node2 = node.getNext();
-        node.setNext(node2.getNext());
-        node2.setNext(split(node2.getNext()));
-
-        return node2;
-    }
-
-    private IntNodeTwo mergeSort(IntNodeTwo node){
-        if(node==null || node.getNext()==null)
-            return node;
-
-        IntNodeTwo node2 = split(node);
-
-        node = mergeSort(node);
-        node2 = mergeSort(node2);
-
-        return merge(node, node2);
-    }
-
-    private void mergeSort(){
-        this._head = mergeSort(this._head);
     }
 }
