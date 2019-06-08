@@ -1,4 +1,5 @@
 package main.maman_15;
+import java.util.Scanner;
 
 /**
  * Maman 15 -
@@ -128,7 +129,20 @@ public class IntListTwo {
      * The numbers will be added to the list
      */
     public void readToList(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter numbers to add to List. To stop, enter -9999");
 
+        // Getting the numbers to add without sort
+        int newInt = scan.nextInt();
+
+        while(newInt != -9999){
+            pushNumber(newInt);
+            newInt = scan.nextInt();
+        }
+        System.out.println("Done");
+
+        // Sorting the list using MergeSort
+        mergeSort();
     }
 
     public String toString(){
@@ -246,6 +260,28 @@ public class IntListTwo {
         return num == average;
     }
 
+    /**
+     * Add number to the top of the list unsorted
+     * @param num number to add
+     */
+    private void pushNumber(int num){
+
+        IntNodeTwo newNum = new IntNodeTwo(num);
+
+        // List is empty
+        if(isListEmpty()){
+            this._head = newNum;
+            this._tail = newNum;
+        }
+
+        // List is not empty - push to the start of the list
+        else{
+            newNum.setNext(this._head);
+            this._head.setPrev(newNum);
+            this._head = newNum;
+        }
+    }
+
     private boolean isSingle(IntNodeTwo nodePointer){
         return this._head == nodePointer && this._tail == nodePointer;
     }
@@ -264,5 +300,54 @@ public class IntListTwo {
 
     private boolean isListEmpty(){
         return this._head == null && this._tail == null;
+    }
+
+    private IntNodeTwo merge(IntNodeTwo node1, IntNodeTwo node2){
+        if(node1 == null)
+            return node2;
+
+        if(node2 == null)
+            return node1;
+
+        if(node1.getNum() < node2.getNum()){
+            node1.setNext(merge(node1, node2.getNext()));
+            IntNodeTwo next = node1.getNext();
+            next.setPrev(node1);
+            return node1;
+        }
+
+        else {
+            node2.setNext(merge(node1, node2.getNext()));
+            IntNodeTwo next = node2.getNext();
+            next.setPrev(node2);
+            return node2;
+        }
+    }
+
+    private IntNodeTwo split(IntNodeTwo node){
+        if(node == null || node.getNext() == null)
+            return null;
+
+        IntNodeTwo node2 = node.getNext();
+        node.setNext(node2.getNext());
+        node2.setNext(split(node2.getNext()));
+
+        return node2;
+    }
+
+    private IntNodeTwo mergeSort(IntNodeTwo node){
+        if(node==null || node.getNext()==null)
+            return node;
+
+        IntNodeTwo node2 = split(node);
+
+        node = mergeSort(node);
+        node2 = mergeSort(node2);
+
+        return merge(node, node2);
+    }
+
+    private void mergeSort(){
+        this._head = mergeSort(this._head);
     }
 }
