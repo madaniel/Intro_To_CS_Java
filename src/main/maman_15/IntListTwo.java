@@ -174,6 +174,7 @@ public class IntListTwo {
         for(pointer = this._head; pointer != null; pointer = pointer.getNext())
             listString += pointer.getNum() + ", ";
 
+        // Taking out the last ", " from the string
         listString = listString.substring(0, listString.length() - 2);
         listString += "}";
 
@@ -325,10 +326,16 @@ public class IntListTwo {
         return this._head == null && this._tail == null;
     }
 
+     /*
+    Taken from the slides
+     */
     private void mergeSort() {
         _head = mergeSort (_head);
     }
 
+    /*
+    Taken from the slides
+     */
     private IntNodeTwo mergeSort (IntNodeTwo node) {
 
         if (node == null || node.getNext() == null)
@@ -341,6 +348,9 @@ public class IntListTwo {
         return merge(node, list2);
     }
 
+    /*
+    Taken from the slides
+     */
     private IntNodeTwo split(IntNodeTwo node) {
         if (node == null || node.getNext() == null)
             return null;
@@ -352,6 +362,9 @@ public class IntListTwo {
 
     }
 
+    /*
+    Taken from the slides
+     */
     private IntNodeTwo merge(IntNodeTwo list1, IntNodeTwo list2) {
 
         if (list1 == null)
